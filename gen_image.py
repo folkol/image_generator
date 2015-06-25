@@ -1,6 +1,6 @@
 from PIL import Image
 from sys import argv
-from random import randrange, sample
+from random import randrange
 import random
 from subprocess import call
 import os
@@ -18,9 +18,9 @@ with file('words.txt') as f:
     words = f.read().split()
 
 def gibberish(n):
-   return ' '.join(sample(words, n))
+   return ' '.join(random.sample(words, n))
 
-def tags(n):
+def csv(n):
     return gibberish(n).replace(' ', ',')
 
 def lucky():
@@ -33,9 +33,11 @@ tags=[
     '-SubjectReference=thismustbe13charsormore %s' % gibberish(2),
     '-ExifImageHeight=666',
     '-ExifImageWidth=321',
-    '-Keywords=%s' % tags(3)
+    '-Keywords=%s' % csv(3),
+    '-Country-PrimaryLocationName=%s' % csv(3),
+    '-Sub-Location=%s' % csv(3),
+    '-Organization=%s' % csv(2)
 ]
 tags = [t for t in tags if lucky()]
-
 
 call(['exiftool', '-overwrite_original', out_name] + tags)
