@@ -1,2 +1,5 @@
-pip install Pillow
-Requires exiftool...
+sudo apt-get install python-pip
+sudo apt-get install python-dev
+sudo pip install Pillow
+# Also, requires exiftool...
+./start_generator.sh
