@@ -3,7 +3,7 @@
 inbox=$1
 if test -z "$inbox"
 then
-    echo "Usage: $0 inbox_location >> /mnt/wire.log &"
+    echo "Usage: nohup $0 inbox_location >> /mnt/wire.log &"
     exit 1
 fi
 
