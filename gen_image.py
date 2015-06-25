@@ -1,13 +1,14 @@
 from PIL import Image
 from sys import argv
-from random import choice, randrange, sample
+from random import randrange, sample
+import random
 from subprocess import call
 import os
 
 
 out_name=argv[1]
 
-f=choice(os.listdir('gallery'))
+f=random.choice(os.listdir('gallery'))
 src=os.path.join('gallery', f)
 size=(randrange(30, 1024), randrange(30, 768))
 Image.open(src).resize(size, Image.ANTIALIAS).save(out_name)
@@ -19,6 +20,9 @@ with file('words.txt') as f:
 def gibberish(n):
    return ' '.join(sample(words, n))
 
+def lucky():
+    return random.choice([True, False])
+
 tags=[
     '-Headline=%s' % gibberish(3),
     '-Caption-Abstract=%s' % gibberish(15),
@@ -27,4 +31,6 @@ tags=[
     '-ExifImageHeight=666',
     '-ExifImageWidth=321'
 ]
-call(['exiftool -delete_original'] + tags + [out_name])
+tags = [t for t in tags if lucky()]
+
+call(['exiftool', '-overwrite_original', out_name] + tags)
