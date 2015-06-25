@@ -27,4 +27,4 @@ tags=[
     '-ExifImageHeight=666',
     '-ExifImageWidth=321'
 ]
-call(['exiftool'] + tags + [out_name])
+call(['exiftool -delete_original'] + tags + [out_name])
