@@ -20,6 +20,9 @@ with file('words.txt') as f:
 def gibberish(n):
    return ' '.join(sample(words, n))
 
+def tags(n):
+    return gibberish(n).replace(' ', ',')
+
 def lucky():
     return random.choice([True, False])
 
@@ -29,8 +32,10 @@ tags=[
     '-Credit=%s' % gibberish(2),
     '-SubjectReference=thismustbe13charsormore %s' % gibberish(2),
     '-ExifImageHeight=666',
-    '-ExifImageWidth=321'
+    '-ExifImageWidth=321',
+    '-Keywords=%s' % tags(3)
 ]
 tags = [t for t in tags if lucky()]
+
 
 call(['exiftool', '-overwrite_original', out_name] + tags)
