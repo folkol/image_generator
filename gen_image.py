@@ -12,7 +12,7 @@ with file('words.txt') as f:
     vocabulary = f.read().split()
 
 def gibberish(n):
-   return ' '.join(random.sample(words, n))
+   return ' '.join(random.sample(vocabulary, n))
 
 def csv(n):
     return gibberish(n).replace(' ', ',')
