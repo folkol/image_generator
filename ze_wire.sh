@@ -7,13 +7,16 @@ then
     exit 1
 fi
 
-while :
-do
-    # Throttling
+throttle() {
     while test $(ls -la $inbox | wc -l) -gt 20
     do
 	sleep 1
     done
+}
+
+while :
+do
+    throttle
 
     name=$(mktemp).jpg
     echo "[$(date)] - Generating: $name"
