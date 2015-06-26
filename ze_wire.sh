@@ -1,14 +1,15 @@
 #!/bin/sh
 
 inbox=$1
-if test -z "$inbox"
+
+if [ -z "$inbox" ]
 then
     echo "Usage: $0 inbox_location"
     exit 1
 fi
 
 throttle() {
-    while test $(ls -la $inbox | wc -l) -gt 20
+    while [ $(ls -la $inbox | wc -l) -gt 20 ]
     do
 	sleep 1
     done
