@@ -6,17 +6,6 @@ from subprocess import call
 import os
 
 
-out_name=argv[1]
-
-f=random.choice(os.listdir('gallery'))
-src=os.path.join('gallery', f)
-size=(randrange(30, 1024), randrange(30, 768))
-Image.open(src).resize(size, Image.ANTIALIAS).save(out_name)
-
-words = []
-with file('words.txt') as f:
-    words = f.read().split()
-
 def gibberish(n):
    return ' '.join(random.sample(words, n))
 
@@ -25,6 +14,21 @@ def csv(n):
 
 def lucky():
     return random.choice([True, False])
+
+f=random.choice(os.listdir('gallery'))
+src=os.path.join('gallery', f)
+img=Image.open(src)
+
+if lucky():
+    size=(randrange(30, 1024), randrange(30, 768))
+    img=img.resize(size, Image.ANTIALIAS)
+
+out_name=argv[1]
+img.save(out_name)
+
+words = []
+with file('words.txt') as f:
+    words = f.read().split()
 
 tags=[
     '-Headline=%s' % gibberish(3),
