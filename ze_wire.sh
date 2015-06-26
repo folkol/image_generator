@@ -9,9 +9,14 @@ fi
 
 while :
 do
-    name=out_$(date +%s).jpg
-    echo "Generating $name"
+    # Throttling
+    while test $(ls -la $inbox | wc -l) -gt 20
+    do
+	sleep 1
+    done
+
+    name=$(mktemp).jpg
+    echo "[$(date)] - Generating: $name"
     python gen_image.py $name
-    mv $name $inbox
-    sleep 10
+    mv $name ${inbox}
 done

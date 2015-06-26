@@ -44,4 +44,4 @@ tags=[
 ]
 tags = [t for t in tags if lucky()]
 
-call(['exiftool', '-overwrite_original', out_name] + tags)
+call(['exiftool', '-overwrite_original', '-q', out_name] + tags)
